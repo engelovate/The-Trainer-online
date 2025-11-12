@@ -1,0 +1,340 @@
+:root{
+    --titles: #F0F0F0;
+    --akcent: #FFCB30;
+    --right: rgb(31, 194, 31);
+    --wrong: rgb(212, 0, 0);
+    --out-of-time: rgb(255, 179, 0);
+    --purple: #66023c;
+    --control-h: 36px;
+}
+
+body {
+    font-family: 'Aptos', system-ui, Arial, sans-serif;
+    background: white;
+    /* border: 2px solid black; */
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    height: 100vh;
+    max-width: 700px;  
+    width: 100%;   
+    bottom: 0;
+    margin-top: 0;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px #ccc;
+    background: white;
+}
+
+.wrapMove{
+  margin-top: 10%;
+}
+
+.functionWrapper {
+  padding: 20px;
+  border-radius: 12px;
+  background-color: rgb(245, 245, 245);
+}
+
+.controls {
+    margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+#timeSelect {
+    border-radius: 10px;
+    padding: 5px;
+    border: 2px solid var(--akcent);
+}
+
+/* Trainer layout */
+.verb-box {
+  display: flex;
+  flex-direction: column;
+  /* grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));  */
+  gap: 10px; 
+  margin: 10px 0;
+  width: 100%;
+  align-items: center;
+}
+
+.slot { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 4px; 
+  width: 100%;
+  max-width: 300px;
+}
+
+.slot label { font-size: 0.8rem; opacity: 0.7; }
+
+.timer{
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #66023c;
+}
+
+.form {
+  background: var(--titles);
+  border: 1px solid rgb(209, 209, 209);
+  color: black;
+  border-radius:  12px;
+  padding: 6px 8px; 
+  font-size: 0.9rem; 
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: var(--control-h);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.verb-box input[type="text"]{
+  height: var(--control-h);
+  padding: 6px 8px;
+  border-radius: 12px;   
+  border: 1px solid #999;
+  box-sizing: border-box;  
+  font-size: 0.9rem;      
+  font-weight: 800;     
+  width: 100%;
+}
+
+
+input {
+    padding: 6px 8px;
+    border-radius: 4px;
+    border: 1px solid #999;
+    flex: 0.9rem;
+    font-size: 1.8vh;
+}
+
+/* default buttons */
+button {
+    padding: 15px 20px;
+    margin-top: 10px;
+    background-color: #66023c;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1.5vh;
+    font-weight: 500;
+}
+
+button:hover{
+  background-color: black;
+  color: #FFCB30;
+}
+
+
+#checkBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+#result {
+    margin-top: 10px;
+    font-weight: bold;
+    flex: 1;
+    margin-left: 40px;
+}
+
+.cefr-group label { margin-right: .5rem; display: inline-flex; align-items: center; gap: .25rem; }
+
+/* Saved verbs grid */
+.saved-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.saved-card {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 6px;
+  background: #fafafa;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.saved-verb { font-weight: 600; word-break: break-word; }
+
+.learn-btn {
+  align-self: flex-end;
+  padding: 6px 10px;
+  border-radius:  12px;
+  border: none;
+  background-color: #66023c;
+  color: white;
+  cursor: pointer;
+}
+
+#learn-btn:hover{
+  background-color: black;
+  color: #FFCB30;
+}
+
+.quickAccessLearn {
+  z-index: 10;
+  background-color: black;
+
+  position: fixed;
+  height: 15px;
+  right: 0px;
+
+  margin: 10px;
+
+  padding: 20px;
+  padding-top: 5px; 
+  /* do not touch, I dont know how it works but it does */
+
+  text-align: center;
+  font-weight: 600;
+}
+
+.controls-accordion {
+  margin-bottom: 8px;
+  border: 1px solid #ddd;
+  border-radius:  12px;
+  padding: 3px 6px;
+  background: #fafafa;
+}
+
+.controls-accordion summary {
+  cursor: pointer;
+  color: #66023c;
+  font-weight: 600;
+  padding: 5px;
+  list-style: none;
+  text-align: center;
+}
+
+.controls-accordion[open] {
+  background: #f0f0f0;
+}
+
+
+/* ===== Saved verbs – looping carousel ===== */
+.saved-carousel {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.sc-viewport {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none; /* Firefox */
+}
+.sc-viewport::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+
+.sc-track {
+  display: inline-flex;
+  gap: 8px;
+  padding: 4px 2px;
+}
+
+.sc-card {
+  scroll-snap-align: start;
+  min-width: 140px;
+  max-width: 160px;
+  flex: 0 0 auto;
+}
+
+.sc-btn {
+  background: #66023c;
+  color: white;
+  border: none;
+  border-radius:  12px;
+  width: 36px;
+  height: 36px;
+  font-size: 20px;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.sc-btn:hover {
+  background: black;
+  color: #FFCB30;
+}
+
+
+.saved-card {
+  border: 1px solid #ddd;
+  border-radius:  12px;
+  padding: 6px;
+  background: #fafafa;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.saved-verb { font-weight: 600; word-break: break-word; }
+
+.learn-btn {
+  align-self: flex-end;
+  padding: 6px 10px;
+  border-radius:  12px;
+  border: none;
+  background: #66023c;
+  color: white;
+  cursor: pointer;
+}
+
+.saved-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.saved-index {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5em;
+  height: 1.5em;
+  border-radius: 9999px;
+  background: var(--akcent);
+  color: white;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+
+/* ===NOTES: */
+/* 
+1. Link to Learn 
+2. Save verbs there 
+3. fix scrolling
+*/

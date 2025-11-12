@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Trainer</title>
+  <link rel="stylesheet" href="tr-style.css" />
+</head>
+<body>
+  <button class="quickAccessLearn">My Learning List</button>
+  <!-- https://afosto.com/docs/tutorial-publish-csv-online-from-google-sheets/ -->
+   <!-- Using Shopify: Add a live version of the Excel Database -->
+
+  <div class="container">
+    <div class="wrapMove">
+      <h1>The Trainer</h1>
+      
+      <details class="controls-accordion">
+        <summary>Settings</summary>
+          <div class="controls">
+            <label for="timeSelect">Time limit:</label>
+            <select id="timeSelect">
+              <option value="10">10s</option>
+              <option value="15" selected>15s</option>
+              <option value="20">20s</option>
+            </select>
+
+            <!-- CEFR multi-select as checkboxes -->
+            <div id="cefrGroup" class="cefr-group" aria-label="CEFR levels" style="margin-left:10px;">
+              <strong>CEFR:</strong>
+              <label><input type="checkbox" id="cefrAll" checked /> All</label>
+              <span id="cefrLevels"></span>
+            </div>
+          </div>
+      </details>
+
+      <h3 class="timer">Remaining time: </h3>
+
+      <div id="warn" style="color:#b00; min-height:1.2em;"></div>
+
+      <div class="functionWrapper">
+        <!-- Random form trainer (one shown, two to fill) -->
+        <div class="verb-box">
+          <div class="slot">
+            <label>Infinitive</label>
+            <div id="show0" class="form" hidden></div>
+            <input id="input0" type="text" placeholder="Infinitive" />
+          </div>
+          <div class="slot">
+            <label>Past simple</label>
+            <div id="show1" class="form" hidden></div>
+            <input id="input1" type="text" placeholder="Past simple" />
+          </div>
+          <div class="slot">
+            <label>Past participle</label>
+            <div id="show2" class="form" hidden></div>
+            <input id="input2" type="text" placeholder="Past participle" />
+          </div>
+        </div>
+
+        <div id="result"></div>
+        <div class="actions">
+          <button id="checkBtn" type="button">Check answer</button>
+          <button id="saveBtn" type="button">Save</button>
+          <button id="nextBtn" type="button">Next</button>
+        </div>
+      </div>
+
+      <h3>Saved verbs:</h3>
+        <div class="saved-carousel">
+          <button class="sc-btn sc-prev" type="button" aria-label="Previous">‹</button>
+
+          <div class="sc-viewport">
+            <!-- Dráha karuselu (místo původního savedGrid) -->
+            <div id="savedTrack" class="sc-track"></div>
+          </div>
+
+          <button class="sc-btn sc-next" type="button" aria-label="Next">›</button>
+        </div>
+      </div>
+  </div>
+
+    <!-- <div id="firebase-verb-list" style="display:none; padding:20px;"></div>
+ -->
+
+  <!-- SheetJS for reading .xlsx in the browser -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+
+  <script type="module" src="firebase-config.js"></script>
+
+  <script src="tr-script.js"></script>
+</body>
+</html>
